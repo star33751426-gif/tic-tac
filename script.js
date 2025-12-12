@@ -161,5 +161,3 @@ function resetGame() {
 
 // 初始化
 init();
-
-
