@@ -50,3 +50,116 @@ function computerMove() {
     active = true;
     document.getElementById('status').innerText = '輪到玩家 (X)';
 }
+
+function findBestMove(board, aiPlayer) {
+    const humanPlayer = aiPlayer === 'O' ? 'X' : 'O';
+
+    let bestScore = -Infinity;
+    let move = null;
+
+    for (let i = 0; i < 9; i++) {
+        if (board[i] === null) {
+            board[i] = aiPlayer;
+            let score = minimax(board, 0, false, aiPlayer, humanPlayer);
+            board[i] = null;
+
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
+        }
+    }
+    return move;
+}
+
+function minimax(board, depth, isMaximizing, aiPlayer, humanPlayer) {
+    if (checkWin(aiPlayer)) return 10 - depth;    // 越快贏越好
+    if (checkWin(humanPlayer)) return depth - 10; // 越慢輸越好
+    if (isFull()) return 0;
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === null) {
+                board[i] = aiPlayer;
+                let score = minimax(board, depth + 1, false, aiPlayer, humanPlayer);
+                board[i] = null;
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+
+    } else {
+        let bestScore = Infinity;
+
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === null) {
+                board[i] = humanPlayer;
+                let score = minimax(board, depth + 1, true, aiPlayer, humanPlayer);
+                board[i] = null;
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+
+function findWinningMove(player) {
+ const wins = [
+ [0,1,2],[3,4,5],[6,7,8],
+ [0,3,6],[1,4,7],[2,5,8],
+ [0,4,8],[2,4,6]
+ ];
+ for (let [a,b,c] of wins) {
+ const line = [board[a], board[b], board[c]];
+ if (line.filter(v => v === player).length === 2 && line.includes(null))
+ return [a,b,c][line.indexOf(null)];
+ }
+
+ return null;
+}
+
+function getRandomMove() {
+    const empty = board.map((v, i) => v ? null : i).filter(v => v !== null);
+    return empty[Math.floor(Math.random() * empty.length)];
+}
+
+function updateBoard() {
+    const cells = document.getElementsByClassName('cell');
+    for (let i = 0; i < 9; i++) {
+        cells[i].innerText = board[i] || '';
+    }
+}
+
+// 判斷勝利
+function checkWin(player) {
+const wins = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+    ];
+    return wins.some(([a,b,c]) => board[a] === player && board[b] === player && board[c] === player);
+}
+
+// 判斷是否平手
+function isFull() {
+    return board.every(cell => cell !== null);
+}
+
+// 結束遊戲
+function endGame(message) {
+    document.getElementById('status').innerText = message;
+    active = false;
+}
+
+// 重開一局
+function resetGame() {
+    init();
+}
+
+// 初始化
+init();
+
+
