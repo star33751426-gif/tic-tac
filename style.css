@@ -1,0 +1,110 @@
+/* 全局設定 */
+body {
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+    background: #0e0e10;
+    color: #f2f2f2;
+    margin: 0;
+    padding-top: 40px;
+}
+
+/* 標題（放大） */
+h1 {
+    font-size: 38px;
+    color: #ffc94a;
+    text-shadow: 0 0 8px rgba(255, 200, 90, 0.8);
+    margin-bottom: 25px;
+}
+
+/* 棋盤外框 */
+.board-wrapper {
+    width: 400px; /* 放大 */
+    padding: 22px; /* 放大 */
+    margin: 0 auto;
+    border-radius: 20px;
+    background: rgba(255, 215, 123, 0.06);
+    box-shadow: 
+        0 0 12px rgba(255, 204, 90, 0.4),
+        inset 0 0 25px rgba(255, 185, 80, 0.2);
+    border: 1px solid rgba(255, 200, 80, 0.35);
+}
+
+/* 棋盤布局 */
+.board {
+    width: 360px;   /* 放大棋盤 */
+    height: 360px;  /* 放大棋盤 */
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;  /* 放大間距 */
+}
+
+/* 每格（加大字體、高度、hover效果） */
+.cell {
+    width: 110px;
+    height: 110px;
+    background: #1a1a1d;
+    border-radius: 14px;
+    border: 2px solid #3a3a40;
+    color: #ffd369;
+    font-weight: bold;
+    font-size: 3em; /* 原本 2.4em → 放大 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    transition: 
+        transform 0.2s,
+        box-shadow 0.2s,
+        background 0.2s,
+        border-color 0.2s;
+}
+
+/* hover：霓虹亮起 */
+.cell:hover {
+    background: #26262b;
+    border-color: #ffc94a;
+    box-shadow: 0 0 18px rgba(255, 200, 90, 0.6);
+    transform: translateY(-4px);
+}
+
+/* 按下瞬間 */
+.cell:active {
+    transform: scale(0.94);
+}
+
+/* 控制區 */
+.controls {
+    margin-top: 25px;
+}
+
+/* 按鈕放大 */
+button {
+    padding: 12px 34px;  /* 放大按鈕 */
+    background: linear-gradient(135deg, #ffd86b, #ffb84d);
+    border: none;
+    border-radius: 30px;
+    font-size: 18px; /* 放大字體 */
+    font-weight: bold;
+    color: #202020;
+    cursor: pointer;
+    letter-spacing: 1px;
+
+    box-shadow: 
+        0 6px 16px rgba(255, 180, 80, 0.5),
+        inset 0 0 6px rgba(255,255,255,0.4);
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 10px 24px rgba(255, 180, 80, 0.6),
+        inset 0 0 12px rgba(255,255,255,0.6);
+}
+
+button:active {
+    transform: scale(0.95);
+}
