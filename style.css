@@ -108,3 +108,28 @@ button:hover {
 button:active {
     transform: scale(0.95);
 }
+
+/* 狀態顯示（輪到誰） */
+#status {
+    font-size: 26px;                  /* 字變大 */
+    font-weight: bold;
+    margin-top: 18px;
+    color: #ffde7a;                   /* 金黃 */
+    
+    padding: 12px 20px;
+    display: inline-block;
+    border-radius: 12px;
+
+    background: rgba(255, 200, 80, 0.08); /* 輕金色霧面底 */
+    border: 1px solid rgba(255, 200, 80, 0.35);
+
+    text-shadow: 
+        0 0 8px rgba(255, 200, 90, 0.75),
+        0 0 14px rgba(255, 170, 60, 0.4);
+
+    box-shadow: 
+        0 0 12px rgba(255, 200, 90, 0.25),
+        inset 0 0 10px rgba(255, 200, 90, 0.1);
+    
+    margin-bottom: 25px;
+}
